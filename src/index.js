@@ -6,39 +6,28 @@ const app = express();
 const DB_USER = "bruno";
 const DB_PASSWORD = encodeURIComponent("oSYHfQPd8ZFYUMY0");
 
-const NewUser = require("./models/NewUser");
+
+
+
 
 //Config de ler json ou xml/ middlewares
-app.use(
-  express.urlencoded({
-    extends: true,
-  })
-);
-
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 
-//Rotas da api
-app.post("/create", async (req, res) => {
-  //req.body
-  const { name, email, password, birthDate } = req.body;
-  const newUser = {
-    name,
-    email,
-    password,
-    birthDate,
-  };
 
-  if ((!name, !email, !password, !birthDate)) {
-    res.status(422).json({ error: "Todos os campos são obrigatórios!" });
-  }
 
-  try {
-    await NewUser.create(newUser);
-    res.status(201).json({ message: "Dados inseridos com sucesso" });
-  } catch (error) {
-    res.status(500).json({ error: "Erro interno" });
-  }
-});
+
+//Rotas
+const newUserRoutes = require('./routes/newUserRoutes')
+const formIRoutes = require('./routes/formIRoutes')
+const loginRoutes = require('./routes/loginRoutes')
+app.use('/newUser', newUserRoutes)
+app.use('/login', loginRoutes)
+app.use('/formI', formIRoutes)
+
+ 
+
+
 
 // rota inicial - endpoint
 app.get("/", (req, res) => {
