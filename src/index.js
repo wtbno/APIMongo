@@ -20,10 +20,12 @@ app.use(express.json());
 //Rotas
 const newUserRoutes = require('./routes/newUserRoutes')
 const formIRoutes = require('./routes/formIRoutes')
+const formIIRoutes = require('./routes/formIIRoutes')
 const loginRoutes = require('./routes/loginRoutes')
 app.use('/newUser', newUserRoutes)
 app.use('/login', loginRoutes)
 app.use('/formI', formIRoutes)
+app.use('/formII', formIIRoutes)
 
  
 
