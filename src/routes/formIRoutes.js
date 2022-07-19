@@ -49,4 +49,35 @@ router.post("/", async (req, res) => {
   }
 });
 
+
+router.get("/", async (req, res) => {
+  try {
+    const formIs = await FormI.find();
+
+    res.status(200).json(formIs);
+  } catch (error) {
+    res.status(500).json({ error: "internal error" });
+  }
+});
+
+router.get("/:id", async (req, res) => {
+
+  const id = req.params.id
+  try {
+    //mongodb utiliza _id
+    const formI = await FormI.findOne({_id: id});
+
+
+    if(!formI){
+      res.status(422).json({message:'Usuário não encontrado'})
+      return
+    }
+
+    res.status(200).json(formI);
+  } catch (error) {
+    res.status(500).json({ error: "internal error" });
+  }
+});
+
+
 module.exports = router;
