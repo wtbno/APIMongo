@@ -5,7 +5,7 @@ const NewUser = mongoose.model('NewUser', {
     email:String,
     password:String,
     birthDate:Number,
-    approved: Boolean
+
 });
 
 
